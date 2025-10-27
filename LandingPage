@@ -1,0 +1,10 @@
+export default function LandingPage({ setPage }) {
+  return (
+    <div>
+      <img src="background.jpg" alt="Background" width="100%" />
+      <h1>Awesome Houseplants Co.</h1>
+      <p>We offer a variety of healthy houseplants for your home or office!</p>
+      <button onClick={() => setPage('listing')}>Get Started</button>
+    </div>
+  );
+}
