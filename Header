@@ -1,0 +1,14 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+export default function Header({ setPage }) {
+  const totalItems = useSelector(state => state.cart.items.reduce((sum, item) => sum + item.quantity, 0));
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', background: '#DDD' }}>
+      <button onClick={() => setPage('listing')}>Product Listing</button>
+      <button onClick={() => setPage('cart')}>
+        🛒 Cart ({totalItems})
+      </button>
+    </div>
+  );
+}
