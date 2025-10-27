@@ -1,0 +1,33 @@
+import React from 'react';
+import { PRODUCTS, CATEGORIES } from './products';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from './cartSlice';
+
+export default function ProductListingPage() {
+  const cart = useSelector(state => state.cart.items.map(p => p.id));
+  const dispatch = useDispatch();
+  return (
+    <div>
+      {CATEGORIES.map(cat => (
+        <div key={cat}>
+          <h2>{cat}</h2>
+          <div style={{ display: 'flex' }}>
+            {PRODUCTS.filter(p => p.category === cat).map(product => (
+              <div key={product.id} style={{ border: '1px solid #333', margin: 8, padding: 8 }}>
+                <img src={product.image} alt={product.name} width={100} />
+                <div>Name: {product.name}</div>
+                <div>Price: ${product.price}</div>
+                <button
+                  onClick={() => dispatch(addToCart(product))}
+                  disabled={cart.includes(product.id)}
+                >
+                  {cart.includes(product.id) ? 'Added' : 'Add to Cart'}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
